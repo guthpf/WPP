@@ -1,0 +1,16 @@
+COMPILING WEBCAMPAPERPEN:
+
+To compile in Windows, you will need:
+- Qt5 and QtCreator (http://qt-project.org/)
+- Eigen (http://eigen.tuxfamily.org/)
+--- note: Eigen is a template library, only header files are needed.
+--- note: you will need to change the include path in WPP.pro appropriately.
+- ESCAPI (http://sol.gfxile.net/escapi/)
+--- note: only the .dll for ESCAPI is actually required
+
+To compile in Linux, you will need 
+- Qt4 and QtCreator (apt-get install libqt4-dev qtcreator)
+- Eigen (apt-get install libeigen3-dev)
+- OpenCV (apt-get install libopencv-dev)
+
+
