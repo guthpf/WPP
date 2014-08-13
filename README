@@ -12,5 +12,7 @@ To compile in Linux, you will need
 - Qt4 and QtCreator (apt-get install libqt4-dev qtcreator)
 - Eigen (apt-get install libeigen3-dev)
 - OpenCV (apt-get install libopencv-dev)
+[Note: In order to control the mouse, WPP can only be run in root mode in Linux]
 
-
+For ArchLinux, there is a PKGBUILD in:
+- https://aur.archlinux.org/packages/we/webcam-paper-pen/PKGBUILD

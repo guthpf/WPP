@@ -65,9 +65,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread_ = new ImgProcThread(this, ui->label, &mouse_);
     thread_->start();
-
-    //ui->radio_touchpadlike->setChecked(true); //makes touchpad-like mode default
-    //ui->label_4->setText(""); //removes Copyright notice
 }
 
 void MainWindow::changeMouseFrameSize()
