@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -73,6 +73,8 @@ private:
     ImgProcThread * thread_;
 
     void stopThread();
+    void loadCfg();
+    void saveCfg();
 };
 
 #include "imgprocthread.h"

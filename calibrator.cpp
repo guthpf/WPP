@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -323,14 +323,19 @@ void Calibrator::drawCC(WPP::Matrix<WPP::RGB> & view)
                 darken_red(view.at(i,j));
 }
 
-void Calibrator::drawRectification(WPP::Matrix<WPP::RGB> & view)
+void Calibrator::drawRectification(WPP::Matrix<WPP::RGB> & view, const Rectification & rectf)
 {
     WPPASSERT(NCROSSESCALIB==4)
     for(int i =  0; i < 4; i++)
         drawline( //TODO asserion error found
-            crossescand_[i],
-            crossescand_[(i+1)%4],
+            rectf[i],
+            rectf[(i+1)%4],
             view, to_orange);
+}
+
+void Calibrator::drawEdges(WPP::Matrix<WPP::RGB> & view)
+{
+    drawRectification(view,crosses_);
 }
 
 bool Calibrator::findCrosses(
@@ -691,7 +696,7 @@ bool Calibrator::findCrosses(
 
             crossescand_.putInOrder();
 
-            drawRectification(view);
+            drawRectification(view, crossescand_);
 
             waiting_acceptance_ = true;
 

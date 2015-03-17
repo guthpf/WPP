@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -94,6 +94,7 @@ public:
     };
 
     void setMode(Mode mode);
+    Mode getMode();
 
 private:
     Mode mode_;

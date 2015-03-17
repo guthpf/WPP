@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -218,6 +218,11 @@ void Mouse::reset_()
 
     border_->setGeometry(root_x - x_-1, root_y - y_-1, stdw_+2, stdh_+2);
 #endif
+}
+
+Mouse::Mode Mouse::getMode()
+{
+    return mode_;
 }
 
 void Mouse::setMode(Mode mode)

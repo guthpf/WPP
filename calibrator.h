@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -58,8 +58,8 @@ private:
     //draws connected components reddish (non-cross) or blueish (cross) depending on classification, using cc_enumeration_ and nonpaper_
     void drawCC(WPP::Matrix<WPP::RGB> & view);
 
-    //draws a rectangle linking the crosses
-    void drawRectification(WPP::Matrix<WPP::RGB> & view);
+    //draws a rectangle linking the vertices of rectf
+    void drawRectification(WPP::Matrix<WPP::RGB> & view, const Rectification & rectf);
 
 public:
 
@@ -118,8 +118,11 @@ public:
     {
         drawCC(view);
 
-        drawRectification(view);
+        drawRectification(view, crossescand_);
     }
+
+    //draws a rectangle linking the crosses
+    void drawEdges(WPP::Matrix<WPP::RGB> & view);
 
     //kernel of the calibration algorithm
     //returns true when crosses are found and stable (found in 3 consecutive frames)

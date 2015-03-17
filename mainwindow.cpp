@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -19,13 +19,56 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+//#include <QDir>
+#include <fstream>
+using namespace std;
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, "About WebcamPaperPen", QString::fromUtf8("WebcamPaperPen (beta)\nCopyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ.\nAll rights reserved. Provided as is with no warranty."));
+    QMessageBox::about(this, "About WebcamPaperPen", QString::fromUtf8("WebcamPaperPen (beta)\nCopyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ.\nAll rights reserved. Provided as is with no warranty."));
 }
 
-#include <QDir>
+void MainWindow::loadCfg()
+{
+    ifstream f("webcampaperpen.preferences");
+    if(!f)
+        return;
+    int w, h, lh, mode;
+    f >> w >> h >> lh >> mode;
+
+    ui->mrw->setPlainText(QString::number(w));
+    ui->mrh->setPlainText(QString::number(h));
+    ui->checkbox_lefthanded->setChecked(lh);
+    switch(mode)
+    {
+    case Mouse::MODE_FIXED_WINDOW:
+        ui->radio_fixedwindow->setChecked(true);
+        break;
+    case Mouse::MODE_TOUCHPADLIKE:
+        ui->radio_touchpadlike->setChecked(true);
+        break;
+    //case Mouse::MODE_FULLSCREEN:
+    default:
+        ui->radio_fullscreen->setChecked(true);
+        break;
+    }
+    f.close();
+}
+
+void MainWindow::saveCfg()
+{
+    ofstream f("webcampaperpen.preferences");
+    if(!f)
+        return;
+    int w, h, lh, mode;
+    //TODO
+    w = ui->mrw->toPlainText().toInt();
+    h = ui->mrh->toPlainText().toInt();
+    lh = thread_->lefthanded;
+    mode = mouse_.getMode();
+    f << w << " " << h << " " << lh << " " << mode;
+    f.close();
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -65,6 +108,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     thread_ = new ImgProcThread(this, ui->label, &mouse_);
     thread_->start();
+
+    loadCfg();
 }
 
 void MainWindow::changeMouseFrameSize()
@@ -106,6 +151,7 @@ using namespace std;
 
 void MainWindow::closeEvent(QCloseEvent * e)
 {
+    saveCfg();
     stopThread();
     mouse_.hideBorder();
 }

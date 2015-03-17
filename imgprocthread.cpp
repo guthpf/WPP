@@ -1,4 +1,4 @@
-//Copyright © 2014 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
+//Copyright © 2014, 2015 Gustavo Thebit Pfeiffer / LCG-COPPE-UFRJ
 /*
     This file is part of WebcamPaperPen.
 
@@ -93,6 +93,9 @@ int ImgProcThread::fmain()
         }
         else
         {
+
+            calib.drawEdges(view);
+
             double xtip, ytip;
             pentrack(img_norm, calib.rectification(), cfr_raw, view, flefthanded, xtip, ytip);
 
@@ -108,6 +111,7 @@ int ImgProcThread::fmain()
                 mouse_->reset();
             else
                 mouse_->setPositionAndButton(px.x, px.y, touching);
+
         }
 
         fbv_->setImage(view);
@@ -187,3 +191,4 @@ TODO:
 - bug windows when moving WPP's mainwindow using the pen (screen won't move for a few seconds)
 - Mac version
 */
+
